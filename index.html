@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六一快乐！</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* 选用一些活泼的字体 */
+            background-image: url('61.jpg'); /* 设置背景图片 */
+            background-size: cover; /* 覆盖整个背景区域 */
+            background-position: center; /* 图片居中显示 */
+            background-repeat: no-repeat; /* 不重复平铺 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.7); /* 白色半透明背景 */
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* 柔和的阴影 */
+            text-align: center;
+            max-width: 80%; /* 限制最大宽度 */
+            box-sizing: border-box; /* 包含内边距和边框在宽度内 */
+            backdrop-filter: blur(5px); /* 磨砂玻璃效果 */
+            -webkit-backdrop-filter: blur(5px); /* Safari兼容性 */
+        }
+
+        h1 {
+            color: #ff6699; /* 可爱的粉色 */
+            font-size: 3.5em; /* 大大的标题 */
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 标题阴影 */
+        }
+
+        /* 文本区域样式 */
+        .text-content {
+            font-size: 1.2em; /* 适合阅读的字体大小 */
+            color: #333; /* 深灰色文本 */
+            line-height: 1.6; /* 舒适的行高 */
+            min-height: 150px; /* 最小高度，保证文本框可见 */
+            padding: 10px;
+        }
+
+        /* 响应式设计：小屏幕下的字体大小调整 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .text-content {
+                font-size: 1em;
+            }
+            .container {
+                padding: 20px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>六一快乐！</h1>
+        <div class="text-content" id="yourTextContent">
+            <p>亲爱的同学们，祝你们六一儿童节快乐！</p>
+            <p>愿你们每天都充满欢声笑语，健康成长，探索世界的奇妙！</p>
+            <p>像小鸟一样自由飞翔，像花朵一样绚丽绽放！</p>
+            <p>本站点由王祈盛制作，姜湾小学260班版权所有</p>
+        </div>
+    </div>
+
+    <script>
+        // 你可以通过JavaScript来动态修改文本内容，例如：
+        // document.getElementById('yourTextContent').innerHTML = "<p>这是新的文本内容！</p>";
+    </script>
+</body>
+</html>
