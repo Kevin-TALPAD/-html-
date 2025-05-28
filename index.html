@@ -7,44 +7,68 @@
     <style>
         body {
             display: flex;
+            flex-direction: column; /* 垂直方向布局 */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* 选用一些活泼的字体 */
-            background-image: url('61.jpg'); /* 设置背景图片 */
-            background-size: cover; /* 覆盖整个背景区域 */
-            background-position: center; /* 图片居中显示 */
-            background-repeat: no-repeat; /* 不重复平铺 */
-            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-image: url('61.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.7); /* 白色半透明背景 */
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 30px 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* 柔和的阴影 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 80%; /* 限制最大宽度 */
-            box-sizing: border-box; /* 包含内边距和边框在宽度内 */
-            backdrop-filter: blur(5px); /* 磨砂玻璃效果 */
-            -webkit-backdrop-filter: blur(5px); /* Safari兼容性 */
+            max-width: 80%;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            margin-bottom: 20px; /* 在文本框下方留出空间给按钮 */
         }
 
         h1 {
-            color: #87CEEB; /* 可爱的粉色 */
-            font-size: 3.5em; /* 大大的标题 */
+            color: #87CEEB;
+            font-size: 3.5em;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 标题阴影 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* 文本区域样式 */
         .text-content {
-            font-size: 1.2em; /* 适合阅读的字体大小 */
-            color: #333; /* 深灰色文本 */
-            line-height: 1.6; /* 舒适的行高 */
-            min-height: 150px; /* 最小高度，保证文本框可见 */
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+            min-height: 150px;
             padding: 10px;
+        }
+
+        .play-button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50; /* 绿色按钮 */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .play-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .play-button:active {
+            background-color: #3e8e41;
+            transform: translateY(0);
         }
 
         /* 响应式设计：小屏幕下的字体大小调整 */
@@ -57,6 +81,10 @@
             }
             .container {
                 padding: 20px 25px;
+            }
+            .play-button {
+                font-size: 1em;
+                padding: 10px 20px;
             }
         }
     </style>
@@ -71,16 +99,28 @@
         </div>
     </div>
 
-    <audio id="backgroundMusic" src="music.wav" loop autoplay></audio>
+    <button class="play-button" id="playMusicButton">点击播放音乐</button>
+
+    <audio id="backgroundMusic" src="music.wav" loop></audio>
 
     <script>
-        // 尝试自动播放音乐
         document.addEventListener('DOMContentLoaded', function() {
-            var audio = document.getElementById('backgroundMusic');
-            audio.play().catch(function(error) {
-                // 许多浏览器限制了自动播放带声音的媒体，除非用户与页面有交互。
-                // 如果自动播放失败，可以提示用户点击播放或等待用户交互后播放。
-                console.log("音乐自动播放失败，可能需要用户交互:", error);
+            var music = document.getElementById('backgroundMusic');
+            var playButton = document.getElementById('playMusicButton');
+
+            playButton.addEventListener('click', function() {
+                if (music.paused) {
+                    music.play()
+                        .then(() => {
+                            playButton.textContent = '音乐播放中...'; // 播放成功后更改按钮文本
+                            playButton.disabled = true; // 播放后禁用按钮，避免重复点击
+                        })
+                        .catch(error => {
+                            console.error("音乐播放失败:", error);
+                            playButton.textContent = '播放失败 :('; // 提示失败
+                            playButton.style.backgroundColor = '#dc3545'; // 变为红色
+                        });
+                }
             });
         });
     </script>
